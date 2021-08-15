@@ -15,128 +15,11 @@
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="./style/reset.css">
+    <link rel="stylesheet" href="./style/leafMap.css">
 </head>
-<style>
-    
-    html,
-    body {
-        max-width: 1000px;
-        margin: auto;
-    }
 
-    .left-sidebar-container{
-        width: 60%;
-    }
-
-    .map-block{
-        margin: 20px 0px;
-        padding: 25px 0px;
-        border-top: 1px solid #e8e8e8;
-        border-bottom: 1px solid #e8e8e8;
-    }    
-
-    .map-countainer{
-        width: 100%;
-        height: 300px;
-    }
-
-    .map-block-title{
-        padding-bottom: 18px;
-        font-size: 15px;
-        font-weight: 700;
-    }
-
-    .map-block-depiction{
-        display: block;
-        padding-bottom: 10px;
-        font-size: 12px;
-    }
-
-    .map-block-distance{
-        display: flex;
-        margin-bottom: 15px;
-    }
-
-    .map-block-distance-text{
-        box-sizing: border-box;
-        padding: 0px 12px;
-        width: 50%;
-        text-align: right;
-        font-size: 12px;
-        font-weight: 900;
-        line-height: 27px;
-    }
-
-    .map-block-input-outside{
-        width: 50%;
-        text-align: right;
-        position: relative;
-    }
-
-    i{
-        font-size: 12px;
-        position: absolute;
-        top: 33%;
-        left: 20%;
-    }
-
-    .map-block-distance-input{
-        text-align: center;
-        width: 80%;
-        border-radius: 8px;
-        padding: 7px;
-        border:1px solid #e8e8e8;
-    }
-
-    .map-block-distance-input:focus{
-        border: 1px solid orange;
-        outline: none;
-    }
-
-    .map-block-price-col{
-        text-align: right;
-        width: 50%;
-    }
-
-    .map-block-price{
-        display: flex;
-        margin-bottom: 10px;
-    }
-    
-
-    .map-block-total-price{
-        width: 80%;
-        margin: auto;
-        font-size: 12px;
-    }
-
-    #map {
-        height: 100%;
-        border-radius: 5px;
-    }
-
-    .map-block-notice{
-        padding: 5px 0px;
-        font-size: 12px;
-    }
-
-
-    /* leaf css */
-    #mapId { 
-        height: 300px;
-        border-radius: 5px; 
-    }
-
-    .leaf-style{
-        text-decoration: none;
-        color: orange;
-    }
-
-
-    /* Optional: Makes the sample page fill the window. */
-    
-  </style>
-  <body>
+<body>
     <div class="left-sidebar-container">
         <div class="map-block">
             <h2 class="map-block-title">取件和退貨選項</h2>
@@ -167,71 +50,10 @@
     
     <!-- leaf js -->
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
-
-
-
     <script src="./index.js"></script>
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCem632bQH4n1otBAe6oCI64ww7j5yn27c&callback=initMap&libraries=&v=weekly" async></script>
-    <script>
-        // let map;
-        // function initMap() {
-        // map = new google.maps.Map(document.getElementById("map"), {
-        //     center: { lat: 24.7553451, lng: 120.9529469 },
-        //     zoom: 15,
-            
-        // });
-        // }
-
-        // google map
-        function initMap() {
-        // The location of Uluru
-        const uluru = { lat: 24.7609326, lng: 120.952988 };
-        // The map, centered at Uluru
-        const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 14,
-            center: uluru,
-        });
-        // The marker, positioned at Uluru
-        const marker = new google.maps.Marker({
-            position: uluru,
-            map: map,
-        });
-        }
-
-
-        ///////////////////// leaf js
-        // 初始化地圖
-        let map = L.map('mapId' , {
-            center: [24.7609326, 120.952988],
-            zoom: 15
-        });
-
-        // 設定圖資來源
-        let osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-        let osm = new L.TileLayer(osmUrl , { minZoom: 5, maxZoom: 25});
-        map.addLayer(osm);
-
-        //總部座標設定
-        let marker_1 = L.marker([24.7609326, 120.952988]).addTo(map);
-        let marker_2 = L.marker([24.8020852,120.9727511]).addTo(map);
-        let marker_3 = L.marker([24.8034877,121.0309443]).addTo(map);
-        
-
-        
-        //圓圈設定
-        let circle = L.circle([24.7609326, 120.952988], {
-            color: 'orange',
-            fillColor: '#ADADAD',
-            fillOpacity: 0.3,
-            radius: 300
-        }).addTo(map);
-
-        //彈跳視窗
-        marker_1.bindPopup(`<b>歡迎光臨</b><br><a class="leaf-style" href="https://www.google.com.tw/maps/place/Chung+Hua+University/@24.7610781,120.955573,15.87z/data=!4m5!3m4!1s0x34684a5cb60622fd:0xb0ead5088c97b0db!8m2!3d24.7598187!4d120.9529895" target="_blank">新竹總部</a>`).openPopup();
-        marker_2.bindPopup(`<b>歡迎光臨</b><br><a class="leaf-style" href="https://www.google.com.tw/maps/place/Hsinchu/@24.7987612,120.9789725,15z/data=!4m5!3m4!1s0x346835e9c2e07205:0x5e8cb484291aeeba!8m2!3d24.8016287!4d120.9715638" target="_blank">新竹站前分店</a>`).openPopup();
-        marker_3.bindPopup(`<b>歡迎光臨</b><br><a class="leaf-style" href="https://www.google.com.tw/maps/place/Hsinchu/@24.8067863,121.0314579,15z/data=!4m5!3m4!1s0x346837075f185ca5:0xf379bf8f5529d143!8m2!3d24.8081649!4d121.0402445" target="_blank">新竹高鐵分店</a>`).openPopup();
-
-    </script>
-  </body>
+    <script src="./js/leaf.js"></script>
+    
+</body>
 </html>
